@@ -1,0 +1,462 @@
+{
+	"info": {
+		"_postman_id": "5f868a14-e435-4702-9e57-cf6c84720f12",
+		"name": "Automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Next_Generation",
+			"item": [
+				{
+					"name": "2.1 TFS 97 - User Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "912a66ff-67cf-4e2c-b801-575b81c6ec6e",
+								"exec": [
+									"//Steps to automate:",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"// Create a variable in Postman test",
+									"// Store varibale value on postman envrioment section (create an env)",
+									"// call variable in apis where the variable needs to be called in to pass \"jwt token\"",
+									"",
+									"var jsonData= JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"auth_token\", jsonData.auth_token);",
+									"",
+									"",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"//Steps to follow validate Schema ",
+									"// Send your request from postman, and Copy response body",
+									"// visit: https://jsonschema.net",
+									"// Follow the video: ",
+									"// Validate Schema for this URL",
+									"// var jsonData= JSON.parse(responseBody);",
+									"",
+									"var schema = {",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",",
+									"    \"$id\": \"http://example.com/example.json\",",
+									"    \"type\": \"object\",",
+									"    \"title\": \"The root schema\",",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",",
+									"    \"default\": {},",
+									"    \"examples\": [",
+									"        {",
+									"            \"auth_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDAxMDc0MjgsImlhdCI6MTYwMDEwMzgyOCwic3ViIjoyLCJyb2xlcyI6WyJhZG1pbiJdLCJ1c2VyX3R5cGUiOiJHZW5lcmFsIiwibmFtZSI6IlRlY2ggU2VydmUgNCBVIiwiZW1haWwiOiJ0czR1QGdtYWlsLmNvbSJ9.jn_L3UrtvjsFR2iZfn9UxBpnkD1ShFzqGwoD3kjLqfs\",",
+									"            \"message\": \"Successfully logged in.\",",
+									"            \"status\": \"success\"",
+									"        }",
+									"    ],",
+									"    \"required\": [",
+									"        \"auth_token\",",
+									"        \"message\",",
+									"        \"status\"",
+									"    ],",
+									"    \"properties\": {",
+									"        \"auth_token\": {",
+									"            \"$id\": \"#/properties/auth_token\",",
+									"            \"type\": \"string\",",
+									"            \"title\": \"The auth_token schema\",",
+									"            \"description\": \"An explanation about the purpose of this instance.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDAxMDc0MjgsImlhdCI6MTYwMDEwMzgyOCwic3ViIjoyLCJyb2xlcyI6WyJhZG1pbiJdLCJ1c2VyX3R5cGUiOiJHZW5lcmFsIiwibmFtZSI6IlRlY2ggU2VydmUgNCBVIiwiZW1haWwiOiJ0czR1QGdtYWlsLmNvbSJ9.jn_L3UrtvjsFR2iZfn9UxBpnkD1ShFzqGwoD3kjLqfs\"",
+									"            ]",
+									"        },",
+									"        \"message\": {",
+									"            \"$id\": \"#/properties/message\",",
+									"            \"type\": \"string\",",
+									"            \"title\": \"The message schema\",",
+									"            \"description\": \"An explanation about the purpose of this instance.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"Successfully logged in.\"",
+									"            ]",
+									"        },",
+									"        \"status\": {",
+									"            \"$id\": \"#/properties/status\",",
+									"            \"type\": \"string\",",
+									"            \"title\": \"The status schema\",",
+									"            \"description\": \"An explanation about the purpose of this instance.\",",
+									"            \"default\": \"\",",
+									"            \"examples\": [",
+									"                \"success\"",
+									"            ]",
+									"        }",
+									"    },",
+									"    \"additionalProperties\": true",
+									"};",
+									"",
+									"tests[\"Schema Validation\"] = tv4.validate(jsonData, schema);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"ts4u@gmail.com\",\n\t\"password\": \"1122\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/api/v1/panel/auth/login",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Precondition: User should be registered with the system.\n\nObjective: User should be able to login with their valid information. Log in as user and gives back a JWT Token with user-data.\n\nTester need to pass these data in the body section\n\nRequest Body:\n\t- email\n\t- password"
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.1 TFS 161 - User Authorization",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "154cae4c-e133-4d37-8abc-da68b890e993",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData= JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"user_ID\", jsonData.data);",
+									"",
+									"//create variable for json Data",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"",
+									"//Validate Schema for this URL",
+									"",
+									"var schema ={",
+									"  \"definitions\": {},",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+									"  \"$id\": \"http://35.184.230.181:7000/auth/authenticate\",",
+									"  \"type\": \"object\",",
+									"  \"required\": [",
+									"    \"data\",",
+									"    \"status\"",
+									"  ],",
+									"  \"properties\": {",
+									"    \"data\": {",
+									"      \"$id\": \"#/properties/data\",",
+									"      \"type\": \"number\"",
+									"    },",
+									"    \"status\": {",
+									"      \"$id\": \"#/properties/status\",",
+									"      \"type\": \"string\",",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }",
+									"  }",
+									"};",
+									"",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{authUrl}}/api/v1/panel/auth/authenticate",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"auth",
+								"authenticate"
+							]
+						},
+						"description": "Makes a get request with Bearer Token as Authorization parameter in the Header configuration.\n\nRequest Header:\n\t- Authorization: 'Bearer $JWT_auth_token'\n\nResponds back the user_id and a success message"
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.2 TFS 477- Show Current User List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{authUrl}}/api/v1/panel/showusers",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"showusers"
+							]
+						},
+						"description": "GET request to list out all the users and their roles from db.\n\nRequest Header: 'Authorization: Bearer $JWT_auth_token'\n\nResponse: dict(data) with user_id and roles dict"
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.3- User Details and Status Check",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/api/v1/panel/auth/status",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"auth",
+								"status"
+							]
+						},
+						"description": "Makes a get request to check the user's current details and status of logging in and out\n\nRequest Header: 'Authorization: Bearer $JWT_auth_token'"
+					},
+					"response": []
+				},
+				{
+					"name": " 3.1.4 TFS 478- Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ebf27c5b-bf99-42b5-8df2-3ddf19e53bc8",
+								"exec": [
+									"var jsonData= JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"auth_token\",jsonData.auth_token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{authUrl}}/api/v1/panel/auth/refresh-token",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.5 TFS 479- User Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6203b01f-de91-49b2-adbb-149b5699245b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 600ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(60000);",
+									"});",
+									"",
+									"",
+									"//create variable for json Data",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"",
+									"//Validate Schema for this URL",
+									"",
+									"var schema ={",
+									"  \"definitions\": {},",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+									"  \"$id\": \"http://35.184.230.181:7000/auth/logout\",",
+									"  \"type\": \"object\",",
+									"  \"required\": [",
+									"    \"message\",",
+									"    \"status\"",
+									"  ],",
+									"  \"properties\": {",
+									"    \"message\": {",
+									"      \"$id\": \"#/properties/message\",",
+									"      \"type\": \"string\",",
+									"      \"pattern\": \"^(.*)$\"",
+									"    },",
+									"    \"status\": {",
+									"      \"$id\": \"#/properties/status\",",
+									"      \"type\": \"string\",",
+									"      \"pattern\": \"^(.*)$\"",
+									"    }",
+									"  }",
+									"};",
+									"",
+									"tests[\"valid schema\"] = tv4.validate(jsonData, schema);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{authUrl}}/api/v1/panel/auth/logout",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"panel",
+								"auth",
+								"logout"
+							]
+						},
+						"description": "User Logout API\n\nRequest Header: 'Authorization: Bearer $JWT_auth_token'\n\nResponse: success/failed status"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
